@@ -9,3 +9,8 @@ gem 'redcarpet', '~> 3.2.2'
 
 gem 'rake', '~> 10.4.2'
 gem 'therubyracer', '~> 0.12.1', platforms: :ruby
+
+gem 'rack-contrib'
+gem 'puma'
+
+ruby "2.2.2"
