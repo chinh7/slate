@@ -77,8 +77,8 @@ uri = URI.parse("https://api.quoine.com")
 http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
  
-user_id = ''
-user_secret = ''
+user_id = 'YOUR_USER_ID'
+user_secret = 'YOUR_USER_SECRET'
 path = "/orders?currency_pair_code=BTCUSD"
  
 nonce = SecureRandom.hex
@@ -296,6 +296,12 @@ POST /orders/
 * `quantity`: Amount of BTC you want to trade.
 * `price`: Price of BTC you want to trade.
 * `leverage_level`: (optional) used for margin trading. Valid values: 2,4,5,10,25 
+* `settings`: (optional) set to hash {"collateralized": true} to fund trade with BTC, to {"multi_currency": true, "multi_currency_code": "USD"} to fund trade with other currency (USD in this case) 
+
+<aside class="notice">
+To trade at any specific leverage level, users will need to go to margin trading dashboard, 
+click on that leverage level and then confirm to get authorized.
+</aside>
 
 
 ## 3.2. Cancel Order
