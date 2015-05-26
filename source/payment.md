@@ -42,9 +42,9 @@ HTTP 503: Service Unavailable
   please wait until you can do the call again.
 ```
 
-Quoine Payment API provides a simple REST API that allows merchants to received payments via Bitcoin.
+Quoine Payment API provides a simple REST API that allows merchants to receive payments via bitcoin.
 <br><br>
-Note that with our Payment System, although buyers pay with Bitcoin merchants always receive the payment in their exact quoted amount and currency, eliminating Bitcoin's volatility factor.
+Note that with our Payment System, although buyers pay with bitcoin merchants always receive the payment in their exact quoted amount and currency, eliminating bitcoin's volatility factor.
 
 
 # 1. Authentication
@@ -109,12 +109,12 @@ Authorization || "APIAuth user_id:signature", eg. "APIAuth 1:tq63DFC2IFHLNQb1ACQ
 
 
 <aside class="notice">
-Quoine Invoice allows shoppers to pay with Bitcoin and merchants to receive the payment in Fiats (USD, JPY, etc)
+Quoine Invoice allows shoppers to pay with bitcoin and merchants to receive the payment in Fiats (USD, JPY, etc)
 <br><br>
-Invoice should be created when buyers make an order to be paid via Bitcoin. Each invoice includes a Bitcoin address where buyer can pay to using Bitcoin.
-Once the Bitcoins are received, Quoine will transfer the payment to merchants using their currency of preference.
+Invoice should be created when buyers make an order to be paid via bitcoin. Each invoice includes a bitcoin address where buyer can pay to using bitcoin.
+Once the bitcoins are received, Quoine will transfer the payment to merchants using their currency of preference.
 <br><br>
-Since Quoine locks Bitcoin price the time of the payment, merchants are not affected by Bitcoin's volatility. Merchants always get the exact quoted price of their items
+Since Quoine locks bitcoin price the time of the payment, merchants are not affected by bitcoin's volatility. Merchants always get the exact quoted price of their items
 </aside>
 
 
@@ -160,7 +160,7 @@ POST /invoices
 
 ### invoice_status:
 * payment_awaited: An invoice starts with this state, waiting for payment.
-* payment_detected: Payment is detected in the Bitcoin network but not 100% confirmed.
+* payment_detected: Payment is detected in the bitcoin network but not 100% confirmed.
 * payment_confirmed: Payment is confirmed and fully received.
 * payment_expired: Payment hasn't been detected 30 minutes since invoice was created.
 
