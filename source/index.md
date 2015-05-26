@@ -1,11 +1,11 @@
 ---
-title: Quoine API Reference
+title: Quoine Exchange API Reference
 
 language_tabs:
   - ruby
 
 toc_footers:
-  - <a href='https://www.quoine.com'>Quoine</a>
+  - <a href='/payment.html'>Quoine Payment API</a>
 
 includes:
   - errors
