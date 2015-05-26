@@ -289,7 +289,7 @@ POST /orders/
 
 #### Parameters:
 
-* `order_type`: Values: `limit`, `market` or `range`.
+* `order_type`: Values: `limit`, `market` or `market_with_range`.
 * `product_code`: Values: `CASH`
 * `currency_pair_code`: BTCUSD, BTCEUR, BTCJPY, BTCSGD, BTCHKD, BTCIDR, BTCAUD, BTCPHP, BTCCNY, BTCINR
 * `side`: Type of order. Values: `sell` or `buy`.
