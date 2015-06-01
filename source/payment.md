@@ -107,6 +107,9 @@ Authorization || "APIAuth user_id:signature", eg. "APIAuth 1:tq63DFC2IFHLNQb1ACQ
 
 # 2. Create An Invoice
 
+```
+POST /invoices
+```
 
 <aside class="notice">
 Quoine Invoice allows shoppers to pay with bitcoin and merchants to receive the payment in Fiats (USD, JPY, etc)
@@ -118,13 +121,10 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
 </aside>
 
 
-```
-POST /invoices
-```
 
 ### Parameters:
 
-* `price`: price of the invoice (default to user's currency)
+* `price`: price of the invoice (default to user's currency on Quoine Exchange)
 * `name` (optional): any string attached to the invoice
 * `data` (optional): any string attached to the invoice
 
@@ -147,7 +147,7 @@ POST /invoices
   "currency": "USD",
   "qrcode_address_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo",
   "qrcode_protocol_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=bitcoin:1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo?amount=0.5",
-  "paid_at": nil,
+  "paid_at": null,
   "created_at": "2014-08-08T19:40:12.855+09:00",
   "updated_at": "2014-08-08T19:40:12.855+09:00",
   "expired_at": "2014-08-08T20:10:12.855+09:00"
@@ -159,19 +159,19 @@ POST /invoices
 * `expired_at`: newly created invoice will expire in 30 minutes
 
 ### invoice_status:
-* payment_awaited: An invoice starts with this state, waiting for payment.
-* payment_detected: Payment is detected in the bitcoin network but not 100% confirmed.
-* payment_confirmed: Payment is confirmed and fully received.
-* payment_expired: Payment hasn't been detected 30 minutes since invoice was created.
+* `payment_awaited`: An invoice starts with this state, waiting for payment.
+* `payment_detected`: Payment is detected in the bitcoin network but not 100% confirmed.
+* `payment_confirmed`: Payment is confirmed and fully received.
+* `payment_expired`: Payment hasn't been detected 30 minutes since invoice was created.
 
 ### system_status:
-* account_created: a bitcoin sub account has been created on Quoine, the invoice now can receive bitcoins. (Invoice status: unpaid)
-* unconfirmed: full payment is received with 1 confirmation. (Invoice status: paid)
-* confirmed: full payment is received and confirmed on the bitcoin network. Ready to be sold to the Exchange. (Invoice status: paid)
-* sold: bitcoin has been sold to market. The invoice can be considered complete. (Invoice status: paid)
-* complete: 'sold' and notified to user via callback. (Invoice status: paid)
-* expired: An expired invoice is one where payment was not received and the 30 minutes payment window has elapsed. (Invoice status: expired)
-* invalid: unconfirmed for more than 3 hours.(Invoice status: paid)
+* `ready`: Invoice is ready to receive bitcoins. (Invoice status: payment_awaited)
+* `unconfirmed`: full payment is received with 1 confirmation. (Invoice status: payment_detected)
+* `confirmed`: full payment is received and confirmed on the bitcoin network. Ready to be sold to the Exchange. (Invoice status: payment_confirmed)
+* `captured`: bitcoin has been successfully convert to fiat. Fiat fund is now available in merchant account
+* `complete`: after a captured invoice has been notified to merchant via callback URL 
+* `expired`: An expired invoice is one where payment was not received and the 30 minutes payment window has elapsed (Invoice status: payment_expired)
+* `invalid`: unconfirmed for more than 3 hours (Invoice status: payment_expired)
 
 
 ### Sample error:
