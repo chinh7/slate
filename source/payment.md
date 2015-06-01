@@ -142,8 +142,8 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
   "name": "invoice name",
   "data": "any data",
   "price": "500.0",
-  "btc_price": 0.5,
-  "btc_balance": 0,
+  "bitcoin_amount": 0.5,
+  "bitcoin_amount_received": 0,
   "currency": "USD",
   "qrcode_address_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo",
   "qrcode_protocol_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=bitcoin:1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo?amount=0.5",
@@ -153,18 +153,18 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
   "expired_at": "2014-08-08T20:10:12.855+09:00"
 }
 ```
-* `btc_price`: price in BTC
 * `bitcoin_address`: a bitcoin address to receive the payment.
-* `btc_balance`: current balance in BTC
+* `bitcoin_amount`: price in BTC
+* `bitcoin_amount_received`: current balance in BTC
 * `expired_at`: newly created invoice will expire in 30 minutes
 
-### invoice_status:
+#### invoice_status:
 * `payment_awaited`: An invoice starts with this state, waiting for payment.
 * `payment_detected`: Payment is detected in the bitcoin network but not 100% confirmed.
 * `payment_confirmed`: Payment is confirmed and fully received.
 * `payment_expired`: Payment hasn't been detected 30 minutes since invoice was created.
 
-### system_status:
+#### system_status:
 * `ready`: Invoice is ready to receive bitcoins. (Invoice status: payment_awaited)
 * `unconfirmed`: full payment is received with 1 confirmation. (Invoice status: payment_detected)
 * `confirmed`: full payment is received and confirmed on the bitcoin network. Ready to be sold to the Exchange. (Invoice status: payment_confirmed)
@@ -208,8 +208,8 @@ GET /invoices/{id}
   "name": "invoice name",
   "data": "any data",
   "price": "500.0",
-  "btc_price": 0.5,
-  "btc_balance": 0.5,
+  "bitcoin_amount": 0.5,
+  "bitcoin_amount_received": 0.5,
   "currency": "USD",
   "status": "btc_sent",
   "qrcode_address_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
@@ -325,8 +325,8 @@ POST /payments_callback_url
     "name": "invoice name",
     "data": "any data",
     "price": "500.0",
-    "btc_price": 0.5,
-    "btc_balance": 0.5,
+    "bitcoin_amount": 0.5,
+    "bitcoin_amount_received": 0.5,
     "currency": "USD",
     "qrcode_address_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo",
     "qrcode_protocol_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=bitcoin:1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo?amount=0.5",
