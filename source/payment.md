@@ -124,7 +124,7 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
 
 ### Parameters:
 
-* `price`: price of the invoice (default to user's currency on Quoine Exchange)
+* `amount`: amount to be paid (default to user's currency on Quoine Exchange)
 * `name` (optional): any string attached to the invoice
 * `data` (optional): any string attached to the invoice
 
@@ -141,7 +141,7 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
   "bitcoin_address": "1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo",
   "name": "invoice name",
   "data": "any data",
-  "price": "500.0",
+  "amount": "500.0",
   "bitcoin_amount": 0.5,
   "bitcoin_amount_received": 0,
   "currency": "USD",
@@ -154,8 +154,8 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
 }
 ```
 * `bitcoin_address`: a bitcoin address to receive the payment.
-* `bitcoin_amount`: price in BTC
-* `bitcoin_amount_received`: current balance in BTC
+* `bitcoin_amount`: total bitcoin amount to be paid
+* `bitcoin_amount_received`: bitcoin amount received 
 * `expired_at`: newly created invoice will expire in 30 minutes
 
 #### invoice_status:
@@ -181,7 +181,7 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
 {
   "status": "fail",
    "errors": {
-     "price": ["can't be blank"]
+     "amount": ["can't be blank"]
    }
 }
 ```
@@ -207,7 +207,7 @@ GET /invoices/{id}
   "bitcoin_address": "19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
   "name": "invoice name",
   "data": "any data",
-  "price": "500.0",
+  "amount": "500.0",
   "bitcoin_amount": 0.5,
   "bitcoin_amount_received": 0.5,
   "currency": "USD",
@@ -324,7 +324,7 @@ POST /payments_callback_url
     "bitcoin_address": "1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo",
     "name": "invoice name",
     "data": "any data",
-    "price": "500.0",
+    "amount": "500.0",
     "bitcoin_amount": 0.5,
     "bitcoin_amount_received": 0.5,
     "currency": "USD",
