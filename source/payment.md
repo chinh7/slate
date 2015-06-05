@@ -151,7 +151,10 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
   "bitcoin_address": "19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
   "bitcoin_uri": "bitcoin:19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4?amount=0.5",
   "name": "invoice name",
-  "data": "any data",
+  "data": {
+    "order_id": "192882",
+    "items": []
+  },
   "amount": "100.0",
   "bitcoin_amount": 0.5,
   "bitcoin_amount_received": 0,
