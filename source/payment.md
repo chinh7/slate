@@ -121,70 +121,63 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
 </aside>
 
 
+> Sample request
 
-### Parameters:
+```
+{
+  "amount": 100,
+  "name": "Invoice #70",
+  "data": {
+    "order_id": "192882",
+    "items": []
+  }
+}
+```
+
+### Request Parameters:
 
 * `amount`: amount to be paid (default to user's currency on Quoine Exchange)
-* `name` (optional): any string attached to the invoice
-* `data` (optional): any string attached to the invoice
+* `name` (optional): name of the invoice
+* `data` (optional): additional payload of the invoice
 
-### Sample response:
-* Status: success (200)
+> Sample response
 
 ```
 {
   "id": 1,
-  "system_status": "account_created",
-  "invoice_status": "unpaid",
+  "invoice_status": "payment_awaited",
   "user_id": 2,
   "sub_account_id": 1,
-  "bitcoin_address": "1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo",
+  "bitcoin_address": "19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
+  "bitcoin_uri": "bitcoin:19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4?amount=0.5",
   "name": "invoice name",
   "data": "any data",
-  "amount": "500.0",
+  "amount": "100.0",
   "bitcoin_amount": 0.5,
   "bitcoin_amount_received": 0,
   "currency": "USD",
-  "qrcode_address_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo",
-  "qrcode_protocol_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=bitcoin:1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo?amount=0.5",
+  "qrcode_address_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
+  "qrcode_protocol_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=bitcoin:19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4?amount=0.5",
   "paid_at": null,
   "created_at": "2014-08-08T19:40:12.855+09:00",
   "updated_at": "2014-08-08T19:40:12.855+09:00",
   "expired_at": "2014-08-08T20:10:12.855+09:00"
 }
 ```
+
+### Response Parameters:
+
 * `bitcoin_address`: a bitcoin address to receive the payment.
+* `bitcoin_uri`: bitcoin uri used to launch Bitcoin client (Luxstack, Coinbase, etc).
 * `bitcoin_amount`: total bitcoin amount to be paid
 * `bitcoin_amount_received`: bitcoin amount received 
 * `expired_at`: newly created invoice will expire in 30 minutes
+* `invoice_status`:
+  - `payment_awaited`: An invoice starts with this state, waiting for payment.
+  - `payment_detected`: Payment is detected in the bitcoin network but not 100% confirmed.
+  - `payment_confirmed`: Payment is confirmed and fully received.
+  - `payment_expired`: Payment hasn't been detected 30 minutes since invoice was created.
 
-#### invoice_status:
-* `payment_awaited`: An invoice starts with this state, waiting for payment.
-* `payment_detected`: Payment is detected in the bitcoin network but not 100% confirmed.
-* `payment_confirmed`: Payment is confirmed and fully received.
-* `payment_expired`: Payment hasn't been detected 30 minutes since invoice was created.
-
-#### system_status:
-* `ready`: Invoice is ready to receive bitcoins. (Invoice status: payment_awaited)
-* `unconfirmed`: full payment is received with 1 confirmation. (Invoice status: payment_detected)
-* `confirmed`: full payment is received and confirmed on the bitcoin network. Ready to be sold to the Exchange. (Invoice status: payment_confirmed)
-* `captured`: bitcoin has been successfully convert to fiat. Fiat fund is now available in merchant account
-* `complete`: after a captured invoice has been notified to merchant via callback URL 
-* `expired`: An expired invoice is one where payment was not received and the 30 minutes payment window has elapsed (Invoice status: payment_expired)
-* `invalid`: unconfirmed for more than 3 hours (Invoice status: payment_expired)
-
-
-### Sample error:
-* Status: unprocessable entity (422)
-
-```
-{
-  "status": "fail",
-   "errors": {
-     "amount": ["can't be blank"]
-   }
-}
-```
 
 # 3. Get An Invoice
 ```
@@ -200,11 +193,11 @@ GET /invoices/{id}
 ```
 {
   "id": 1,
-  "system_status": "confirmed",
-  "invoice_status": "paid",
+  "invoice_status": "payment_confirmed",
   "user_id": 1,
   "sub_account_id": 1,
   "bitcoin_address": "19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
+  "bitcoin_uri": "bitcoin:19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4?amount=0.5",
   "name": "invoice name",
   "data": "any data",
   "amount": "500.0",
@@ -317,19 +310,19 @@ POST /payments_callback_url
 {
   "invoice": {
     "id": 1,
-    "system_status": "complete",
     "invoice_status": "payment_confirmed",
     "user_id": 2,
     "sub_account_id": 1,
-    "bitcoin_address": "1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo",
+    "bitcoin_address": "19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
+    "bitcoin_uri": "bitcoin:19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4?amount=0.5",
     "name": "invoice name",
     "data": "any data",
     "amount": "500.0",
     "bitcoin_amount": 0.5,
     "bitcoin_amount_received": 0.5,
     "currency": "USD",
-    "qrcode_address_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo",
-    "qrcode_protocol_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=bitcoin:1MutST9LxW4JxNVSjyzBV6bVwi64cD9Zoo?amount=0.5",
+    "qrcode_address_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
+    "qrcode_protocol_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=bitcoin:19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4?amount=0.5",
     "paid_at": "2014-08-08T19:50:12.855+09:00",
     "created_at": "2014-08-08T19:40:12.855+09:00",
     "updated_at": "2014-08-08T19:40:12.855+09:00",
