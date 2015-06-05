@@ -177,7 +177,14 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
   - `payment_detected`: Payment is detected in the bitcoin network but not 100% confirmed.
   - `payment_confirmed`: Payment is confirmed and fully received.
   - `payment_expired`: Payment hasn't been detected 30 minutes since invoice was created.
-
+* `system_status`: *this will be removed in the next release. please use as reference only*
+  - `ready`: Invoice is ready to receive bitcoins. (Invoice status: payment_awaited)
+  - `unconfirmed`: full payment is received with 1 confirmation. (Invoice status: payment_detected)
+  - `confirmed`: full payment is received and confirmed on the bitcoin network. Ready to be sold to the Exchange. (Invoice status: payment_confirmed)
+  - `captured`: bitcoin has been successfully convert to fiat. Fiat fund is now available in merchant account
+  - `complete`: after a captured invoice has been notified to merchant via callback URL 
+  - `expired`: An expired invoice is one where payment was not received and the 30 minutes payment window has elapsed (Invoice status: payment_expired)
+  - `invalid`: unconfirmed for more than 3 hours (Invoice status: payment_expired)
 
 # 3. Get An Invoice
 ```
