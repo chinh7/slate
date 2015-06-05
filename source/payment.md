@@ -320,26 +320,24 @@ POST /payments_callback_url
 
 ```
 {
-  "invoice": {
-    "id": 1,
-    "invoice_status": "payment_confirmed",
-    "user_id": 2,
-    "sub_account_id": 1,
-    "bitcoin_address": "19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
-    "bitcoin_uri": "bitcoin:19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4?amount=0.5",
-    "name": "invoice name",
-    "data": "any data",
-    "amount": "500.0",
-    "bitcoin_amount": 0.5,
-    "bitcoin_amount_received": 0.5,
-    "currency": "USD",
-    "qrcode_address_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
-    "qrcode_protocol_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=bitcoin:19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4?amount=0.5",
-    "paid_at": "2014-08-08T19:50:12.855+09:00",
-    "created_at": "2014-08-08T19:40:12.855+09:00",
-    "updated_at": "2014-08-08T19:40:12.855+09:00",
-    "expired_at": "2014-08-08T20:10:12.855+09:00"
-  }
+  "id": 1,
+  "invoice_status": "payment_confirmed",
+  "user_id": 2,
+  "sub_account_id": 1,
+  "bitcoin_address": "19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
+  "bitcoin_uri": "bitcoin:19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4?amount=0.5",
+  "name": "invoice name",
+  "data": "any data",
+  "amount": "500.0",
+  "bitcoin_amount": 0.5,
+  "bitcoin_amount_received": 0.5,
+  "currency": "USD",
+  "qrcode_address_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4",
+  "qrcode_protocol_url": "http://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=bitcoin:19wMMfLQ4Hu2XehHAbR3xY9UMEaaRLUMf4?amount=0.5",
+  "paid_at": "2014-08-08T19:50:12.855+09:00",
+  "created_at": "2014-08-08T19:40:12.855+09:00",
+  "updated_at": "2014-08-08T19:40:12.855+09:00",
+  "expired_at": "2014-08-08T20:10:12.855+09:00"
 }
 ```
 
