@@ -172,6 +172,8 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
 * `bitcoin_amount`: total bitcoin amount to be paid
 * `bitcoin_amount_received`: bitcoin amount received 
 * `expired_at`: newly created invoice will expire in 30 minutes
+* `qrcode_address_url`: link to the image of the bitcoin address QR Code (size 500x500)
+* `qrcode_protocol_url`: link to the image of the bitcoin uri QR Code (size 500x500)
 * `invoice_status`:
   - `payment_awaited`: An invoice starts with this state, waiting for payment.
   - `payment_detected`: Payment is detected in the bitcoin network but not 100% confirmed.
