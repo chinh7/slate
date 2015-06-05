@@ -313,7 +313,8 @@ POST /payments_callback_url
 
 
 ### Parameters:
-* `callback`: Everytime invoice status is updated, Quoine will notify merchant via this web hook.
+* `callback`: Everytime invoice status is updated, Quoine will notify merchant via this web hook. The POST request is signed with your key and secret using the method described in [Authentication]#authentication
+
 
 
 > Data POSTed to callback url
