@@ -174,6 +174,7 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
 * `bitcoin_uri`: bitcoin uri used to launch Bitcoin client (Luxstack, Coinbase, etc).
 * `bitcoin_amount`: total bitcoin amount to be paid
 * `bitcoin_amount_received`: bitcoin amount received 
+* `bitcoin_amount_claimed`: bitcoin amount claimed (check the Invoice Claim API) 
 * `expired_at`: newly created invoice will expire in 30 minutes
 * `qrcode_address_url`: link to the image of the bitcoin address QR Code (size 500x500)
 * `qrcode_protocol_url`: link to the image of the bitcoin uri QR Code (size 500x500)
@@ -272,8 +273,29 @@ GET /invoices?page=2&per=5
 
 ```
 
+# 5. Claim bitcoin surplus from Invoice
 
-# 5. Get Profile
+In case users transfer more that `bitcoin_amount` to the Invoice, the surplus amount can be claimed back to merchant's bitcoin account
+
+```
+GET /invoices/:id/claim_bitcoin
+GET /invoices?page=2&per=5
+```
+### Parameters:
+* `id`: invoice id.
+
+### Sample response:
+* Status: success (200)
+
+> The bitcoin amount claimed is returned
+```
+{
+  "amount": 0.25
+}
+
+```
+
+# 6. Get Profile
 Get merchant profile
 
 ```
@@ -297,7 +319,7 @@ GET /profile
 ```
 
 
-# 6. Update Notification URL
+# 7. Update Notification URL
 ```
 POST /payments_callback_url
 ```
