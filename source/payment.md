@@ -139,6 +139,8 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
 * `amount`: amount to be paid (default to user's currency on Quoine Exchange)
 * `name` (optional): name of the invoice
 * `data` (optional): additional payload of the invoice
+* `refund_mispayment` (optional): if set to true, mispayment will be automatically claimed 1 hour after invoice expires
+* `refund_address` (optional): if set, bitcoin will be refunded to this address, otherwise bitcoin will be refunded to merchant's Quoine Bitcoin Account
 
 > Sample response
 
@@ -176,8 +178,6 @@ Since Quoine locks bitcoin price the time of the payment, merchants are not affe
 * `bitcoin_amount_received`: bitcoin amount received 
 * `bitcoin_amount_claimed`: bitcoin amount claimed (check the Invoice Claim API) 
 * `expired_at`: newly created invoice will expire in 30 minutes
-* `refund_mispayment`: if set to true, mispayment will be automatically claimed 1 hour after invoice expires
-* `refund_address`: if set, bitcoin will be refunded to this address, otherwise bitcoin will be refunded to merchant's Quoine Bitcoin Account
 * `qrcode_address_url`: link to the image of the bitcoin address QR Code (size 500x500)
 * `qrcode_protocol_url`: link to the image of the bitcoin uri QR Code (size 500x500)
 * `invoice_status`:
