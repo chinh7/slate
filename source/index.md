@@ -72,26 +72,26 @@ require 'net/http'
 require 'time'
 require 'securerandom'
 require 'base64'
- 
+
 uri = URI.parse("https://api.quoine.com")
 http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
- 
+
 user_id = 'YOUR_USER_ID'
 user_secret = 'YOUR_USER_SECRET'
 path = "/orders?currency_pair_code=BTCUSD"
- 
+
 nonce = SecureRandom.hex
 date = Time.now.httpdate
 canonical_string = "application/json,,#{path},#{date},#{nonce}"
 signature = Base64.strict_encode64(OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha1'), user_secret, canonical_string))
- 
+
 request = Net::HTTP::Get.new(path)
 request.add_field('Content-Type', 'application/json')
 request.add_field('Date', date)
 request.add_field('NONCE', nonce)
 request.add_field('Authorization', "APIAuth #{user_id}:#{signature}")
- 
+
 response = http.request(request)
 ```
 
@@ -256,12 +256,13 @@ POST /orders/
     "currency_pair_code": "BTCJPY",
     "side": "sell",
     "quantity": 5.0,
-    "price": 500
+    "price": 500,
+    "status": "live"
   }
 }
 ```
 
-> Success Response 
+> Success Response
 
 ```
 {
@@ -290,16 +291,17 @@ POST /orders/
 #### Parameters:
 
 * `order_type`: Values: `limit`, `market` or `market_with_range`.
+* `status`: Values: `live`, `filled` or `cancelled`.
 * `product_code`: Values: `CASH`
 * `currency_pair_code`: BTCUSD, BTCEUR, BTCJPY, BTCSGD, BTCHKD, BTCIDR, BTCAUD, BTCPHP, BTCCNY, BTCINR
 * `side`: Type of order. Values: `sell` or `buy`.
 * `quantity`: Amount of BTC you want to trade.
 * `price`: Price of BTC you want to trade.
-* `leverage_level`: (optional) used for margin trading. Valid values: 2,4,5,10,25 
-* `settings`: (optional) set to hash {"collateralized": true} to fund trade with BTC, to {"multi_currency": true, "multi_currency_code": "USD"} to fund trade with other currency (USD in this case) 
+* `leverage_level`: (optional) used for margin trading. Valid values: 2,4,5,10,25
+* `settings`: (optional) set to hash {"collateralized": true} to fund trade with BTC, to {"multi_currency": true, "multi_currency_code": "USD"} to fund trade with other currency (USD in this case)
 
 <aside class="notice">
-To trade at any specific leverage level, users will need to go to margin trading dashboard, 
+To trade at any specific leverage level, users will need to go to margin trading dashboard,
 click on that leverage level and then confirm to get authorized.
 </aside>
 
