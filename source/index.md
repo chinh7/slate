@@ -291,7 +291,6 @@ POST /orders/
 #### Parameters:
 
 * `order_type`: Values: `limit`, `market` or `market_with_range`.
-* `status`: Values: `live`, `filled` or `cancelled`.
 * `product_code`: Values: `CASH`
 * `currency_pair_code`: BTCUSD, BTCEUR, BTCJPY, BTCSGD, BTCHKD, BTCIDR, BTCAUD, BTCPHP, BTCCNY, BTCINR
 * `side`: Type of order. Values: `sell` or `buy`.
@@ -389,14 +388,16 @@ GET /orders/:id
 ## 3.4. Get Orders
 
 ```
-GET /orders?currency_pair_code=:currency_pair_code
+GET /orders?currency_pair_code=:currency_pair_code?status=:status?product_code=:product_code
 ```
 
 #### Parameters:
 
 * `currency_pair_code`: BTCUSD, BTCEUR, BTCJPY, BTCSGD, BTCHKD, BTCIDR, BTCAUD, BTCPHP, BTCCNY, BTCINR.
+* `status`: live, filled, cancelled
+* `product_code`: CASH, FUTURE
 
-*(`currency_pair_code` are used to filter results and can be omitted)*
+*(Those parameters are used to filter results and can be omitted)*
 
 
 
