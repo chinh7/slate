@@ -58,7 +58,7 @@ By default, you need to pass authorized params (in Authentication) for all reque
 ## 1.1 Token-based (DEPRECATED)
 
 Authentication is done using 3 parameters: `Device`, `UserId`, `Token`. These parameters can be obtained from
-<a href="https://www.quoine.com/app/#/app/settings" target="_blank">Quoine settings page</a>
+<a href="https://www.quoine.com/app/#/app/settings" target="_blank"> Quoine settings page</a>
 
 These parameters need to be supplied in header of all requests as: `X-Quoine-Device`, `X-Quoine-User-Id`, `X-Quoine-User-Token`
 
@@ -454,9 +454,104 @@ GET /orders?currency_pair_code=:currency_pair_code?status=:status?product_code=:
 }
 ```
 
-# 4. Accounts
+# 4. Executions
 
-## 4.1. Listing Accounts
+## 4.1. Get Executions
+
+```
+GET /executions?currency_pair_code=BTCUSD&limit=10&page=2
+```
+
+Parameters   | Optional? | Description
+---------|-----------|------------
+currency_pair_code || e.g. BTCJPY
+limit | yes | How many executions should be returned. Must be <= 1000. Default is 20
+page | yes | From what page the executions should be returned, e.g if limit=20 and page=2, the response would start from 21th execution. Default is 1
+
+> Success Response
+
+```json
+{
+    "models": [
+        {
+            "id": "16640",
+            "quantity": 0.1,
+            "price": 224.72,
+            "taker_side": "sell",
+            "created_at": "2015-06-16T10:17:36+00:00"
+        },
+        {
+            "id": "16639",
+            "quantity": 0.01,
+            "price": 224.72,
+            "taker_side": "sell",
+            "created_at": "2015-06-16T10:15:24+00:00"
+        },
+        {
+            "id": "16638",
+            "quantity": 0.11,
+            "price": 225,
+            "taker_side": "buy",
+            "created_at": "2015-06-16T09:47:32+00:00"
+        },
+        {
+            "id": "16637",
+            "quantity": 0.01,
+            "price": 224.72,
+            "taker_side": "sell",
+            "created_at": "2015-06-15T11:08:09+00:00"
+        },
+        {
+            "id": "16636",
+            "quantity": 0.05,
+            "price": 224.72,
+            "taker_side": "sell",
+            "created_at": "2015-06-15T10:34:22+00:00"
+        },
+        {
+            "id": "16635",
+            "quantity": 0.40706195,
+            "price": 225,
+            "taker_side": "buy",
+            "created_at": "2015-06-15T10:33:48+00:00"
+        },
+        {
+            "id": "16634",
+            "quantity": 0.59293805,
+            "price": 224.99,
+            "taker_side": "buy",
+            "created_at": "2015-06-15T10:33:48+00:00"
+        },
+        {
+            "id": "16633",
+            "quantity": 0.01,
+            "price": 224.99,
+            "taker_side": "buy",
+            "created_at": "2015-06-15T10:33:03+00:00"
+        },
+        {
+            "id": "16632",
+            "quantity": 0.02,
+            "price": 224.99,
+            "taker_side": "buy",
+            "created_at": "2015-06-10T21:23:50+00:00"
+        },
+        {
+            "id": "16631",
+            "quantity": 0.01,
+            "price": 224.72,
+            "taker_side": "sell",
+            "created_at": "2015-06-10T21:23:35+00:00"
+        }
+    ],
+    "current_page": 2,
+    "total_pages": 120
+}
+```
+
+# 5. Accounts
+
+## 5.1. Listing Accounts
 
 
 ```
@@ -523,7 +618,7 @@ GET /accounts
 }
 ```
 
-# 5. Upload Document
+# 6. Upload Document
 
 ```
 POST /users/upload_documents
