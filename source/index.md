@@ -256,8 +256,7 @@ POST /orders/
     "currency_pair_code": "BTCJPY",
     "side": "sell",
     "quantity": 5.0,
-    "price": 500,
-    "status": "live"
+    "price": 500
   }
 }
 ```
