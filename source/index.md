@@ -458,7 +458,7 @@ GET /orders?currency_pair_code=:currency_pair_code?status=:status?product_code=:
 ## 4.1. Get Executions
 
 ```
-GET /executions?currency_pair_code=BTCUSD&limit=10&page=2
+GET /executions?currency_pair_code=BTCUSD&limit=5&page=2
 ```
 
 Parameters   | Optional? | Description
@@ -468,84 +468,114 @@ limit | yes | How many executions should be returned. Must be <= 1000. Default i
 page | yes | From what page the executions should be returned, e.g if limit=20 and page=2, the response would start from 21th execution. Default is 1
 
 > Success Response
+<br>
+> Executions are sorted in DESCENDING order
 
 ```json
 {
     "models": [
         {
-            "id": "16640",
-            "quantity": 0.1,
-            "price": 224.72,
-            "taker_side": "sell",
-            "created_at": "2015-06-16T10:17:36+00:00"
-        },
-        {
-            "id": "16639",
+            "id": "190342",
             "quantity": 0.01,
-            "price": 224.72,
-            "taker_side": "sell",
-            "created_at": "2015-06-16T10:15:24+00:00"
-        },
-        {
-            "id": "16638",
-            "quantity": 0.11,
-            "price": 225,
+            "price": 295.07,
             "taker_side": "buy",
-            "created_at": "2015-06-16T09:47:32+00:00"
+            "created_at": 1438083311
         },
         {
-            "id": "16637",
+            "id": "190341",
             "quantity": 0.01,
-            "price": 224.72,
-            "taker_side": "sell",
-            "created_at": "2015-06-15T11:08:09+00:00"
-        },
-        {
-            "id": "16636",
-            "quantity": 0.05,
-            "price": 224.72,
-            "taker_side": "sell",
-            "created_at": "2015-06-15T10:34:22+00:00"
-        },
-        {
-            "id": "16635",
-            "quantity": 0.40706195,
-            "price": 225,
+            "price": 295.07,
             "taker_side": "buy",
-            "created_at": "2015-06-15T10:33:48+00:00"
+            "created_at": 1438083275
         },
         {
-            "id": "16634",
-            "quantity": 0.59293805,
-            "price": 224.99,
-            "taker_side": "buy",
-            "created_at": "2015-06-15T10:33:48+00:00"
-        },
-        {
-            "id": "16633",
+            "id": "190340",
             "quantity": 0.01,
-            "price": 224.99,
+            "price": 294.38,
             "taker_side": "buy",
-            "created_at": "2015-06-15T10:33:03+00:00"
+            "created_at": 1438083254
         },
         {
-            "id": "16632",
-            "quantity": 0.02,
-            "price": 224.99,
-            "taker_side": "buy",
-            "created_at": "2015-06-10T21:23:50+00:00"
-        },
-        {
-            "id": "16631",
+            "id": "190207",
             "quantity": 0.01,
-            "price": 224.72,
+            "price": 295.57,
             "taker_side": "sell",
-            "created_at": "2015-06-10T21:23:35+00:00"
+            "created_at": 1438054539
+        },
+        {
+            "id": "190206",
+            "quantity": 0.01,
+            "price": 295.57,
+            "taker_side": "sell",
+            "created_at": 1438054511
         }
     ],
     "current_page": 2,
-    "total_pages": 120
+    "total_pages": 1941
 }
+```
+
+## 4.2. Get Executions by Timestamp
+
+```
+GET /executions?currency_pair_code=BTCUSD&timestamp=1430630863&limit=5
+```
+
+Parameters   | Optional? | Description
+---------|-----------|------------
+currency_pair_code || e.g. BTCJPY
+timestamp || Only show executions at or after this timestamp (Unix timestamps in seconds)
+limit | yes | How many executions should be returned. Must be <= 1000. Default is 20
+
+<aside class="notice">
+Since the timestamp is in seconds, there could be several executions with the same timestamp.
+The server will make the effort to include those with the same timestamps in one response. So users won't miss any execution in subsequent API calls (where new timestamp should = last execution timestamp + 1)
+<br>
+As a result, the number of executions returned could be larger than `limit` in some cases.
+</aside>
+
+> Success Response
+<br>
+> Executions are sorted in ASCENDING order
+
+```json
+[
+    {
+        "id": "25148",
+        "quantity": 9.82,
+        "price": 242.01,
+        "taker_side": "buy",
+        "created_at": 1430656664
+    },
+    {
+        "id": "25151",
+        "quantity": 0.1,
+        "price": 241,
+        "taker_side": "buy",
+        "created_at": 1430658400
+    },
+    {
+        "id": "25152",
+        "quantity": 9.82,
+        "price": 240.59,
+        "taker_side": "sell",
+        "created_at": 1430658407
+    },
+    {
+        "id": "25153",
+        "quantity": 0.099736,
+        "price": 240.51,
+        "taker_side": "sell",
+        "created_at": 1430658459
+    },
+    {
+        "id": "25385",
+        "quantity": 1.565,
+        "price": 228.16,
+        "taker_side": "buy",
+        "created_at": 1430949047
+    }
+]
 ```
 
 # 5. Accounts
