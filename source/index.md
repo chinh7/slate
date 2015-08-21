@@ -58,7 +58,7 @@ By default, you need to pass authorized params (in Authentication) for all reque
 <aside class="notice">
 RATE LIMITING
 <br>
-API users should not make more than 300 requests per 5 minute. Any requests go beyond the limit will return with a 429 status
+API users should not make more than 300 requests per 5 minute. Requests go beyond the limit will return with a 429 status
 </aside>
 
 # I. User API
