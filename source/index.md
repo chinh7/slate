@@ -34,6 +34,9 @@ HTTP 422: Unprocessable Entity
   - Missing params
   - The format of data is wrong
 
+HTTP 429: Too Many Requests
+  This status indicates that the user has sent too many requests in a given amount of time  
+
 HTTP 503: Service Unavailable
   Many reasons, body will include details
   - An internal error on Authy.
@@ -51,6 +54,12 @@ Quoine provides access to two types of API consumer:
 Both JSON and XML formats are supported by all API calls
 You always need to specify a format (json | xml)
 By default, you need to pass authorized params (in Authentication) for all requests, otherwise, you will get HTTP status 401.
+
+<aside class="notice">
+RATE LIMITING
+<br>
+API users should not make more than 300 request per 5 minutes. Any requests go beyond the limit will return with a 429 status
+</aside>
 
 # I. User API
 
