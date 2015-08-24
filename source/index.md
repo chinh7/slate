@@ -129,9 +129,9 @@ Authorization || "APIAuth user_id:signature", eg. "APIAuth 1:tq63DFC2IFHLNQb1ACQ
 </aside>
 
 
-# 2. Markets
+# 2. Products (Markets)
 
-## 2.1. Markets (Products) Summary
+## 2.1. List Products
 
 ```
 GET /products
@@ -168,7 +168,7 @@ GET /products
 * `fetch`: `all` to fetch all live markets, otherwise, your accessiable markets are returned.
 
 
-## 2.2. Specific Market (Product) Summary
+## 2.2. Get a Product
 
 ```
 GET /products/:product_id
@@ -215,7 +215,7 @@ GET /products/code/:code/:currency_pair_code
 }
 ```
 
-## 2.3. Market Price Ladder
+## 2.3. Get Price Levels (Order Book)
 
 ```
 GET /products/:product_id/price_levels
@@ -249,7 +249,7 @@ GET /products/:product_id/price_levels
 
 # 3. Orders
 
-## 3.1. Create Order
+## 3.1. Create an Order
 
 ```
 POST /orders/
@@ -313,7 +313,7 @@ click on that leverage level and then confirm to get authorized.
 </aside>
 
 
-## 3.2. Cancel Order
+## 3.2. Cancel an Order
 
 ```
 PUT /orders/:id/cancel
@@ -351,7 +351,7 @@ PUT /orders/:id/cancel
 
 * `id`: Order ID. You might retrieve from 3.1.
 
-## 3.3. Get Order Details
+## 3.3. Get an Order
 
 #### Parameters:
 
@@ -393,7 +393,7 @@ GET /orders/:id
 
 > * available statuses are "live", "filled", "cancelled".
 
-## 3.4. Get Orders
+## 3.4. List Orders
 
 ```
 GET /orders?currency_pair_code=:currency_pair_code?status=:status?product_code=:product_code
@@ -464,7 +464,7 @@ GET /orders?currency_pair_code=:currency_pair_code?status=:status?product_code=:
 
 # 4. Executions
 
-## 4.1. Get Executions
+## 4.1. List Executions
 
 ```
 GET /executions?currency_pair_code=BTCUSD&limit=5&page=2
@@ -524,7 +524,7 @@ page | yes | From what page the executions should be returned, e.g if limit=20 a
 }
 ```
 
-## 4.2. Get Executions by Timestamp
+## 4.2. List Executions by Timestamp
 
 ```
 GET /executions?currency_pair_code=BTCUSD&timestamp=1430630863&limit=5
@@ -587,9 +587,73 @@ As a result, the number of executions returned could be larger than `limit` in s
 ]
 ```
 
+## 4.3. List Executions by User
+
+
+<aside class="notice">
+This endpoint requires user to be authenticated
+<br>
+Please refer to 4.1 & 4.2 for parameters
+</aside>
+
+
+```
+GET /executions/me?currency_pair_code=BTCUSD&limit=2&page=2
+```
+
+```json
+{
+    "models": [
+        {
+            "id": "194442",
+            "quantity": 0.01,
+            "price": 295.07,
+            "taker_side": "buy",
+            "created_at": 1438083311
+        },
+        {
+            "id": "194440",
+            "quantity": 0.01,
+            "price": 295.07,
+            "taker_side": "sell",
+            "created_at": 1438083175
+        },
+    ],
+    "current_page": 2,
+    "total_pages": 2030
+}
+```
+
+
+
 # 5. Accounts
 
-## 5.1. Listing Accounts
+## 5.1. List Accounts Balances
+
+```
+GET /accounts/balance
+```
+
+> Success Response
+
+```json
+[
+    {
+        "currency": "BTC",
+        "balance": 0.04925688
+    },
+    {
+        "currency": "USD",
+        "balance": 7.17696
+    },
+    {
+        "currency": "JPY",
+        "balance": 356.01377
+    }
+]
+```
+
+## 5.2. List Accounts
 
 
 ```
