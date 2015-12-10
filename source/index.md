@@ -67,7 +67,7 @@ API users should not make more than 300 requests per 5 minute. Requests go beyon
 ## 1.1 Token-based (DEPRECATED)
 
 Authentication is done using 3 parameters: `Device`, `UserId`, `Token`. These parameters can be obtained from
-<a href="https://www.quoine.com/app/#/app/settings" target="_blank"> Quoine settings page</a>
+<a href="https://www.quoine.com/app/#/app/settings" target="_blank"> Quoine settings page </a>
 
 These parameters need to be supplied in header of all requests as: `X-Quoine-Device`, `X-Quoine-User-Id`, `X-Quoine-User-Token`
 
@@ -747,6 +747,101 @@ POST /users/upload_documents
 {
   "success": false,
   "message": "Invalid params"
+}
+```
+
+
+# 7. Lending
+
+## 7.1. Create a loan bid
+
+```
+POST /loan_bids
+```
+#### Parameters:
+
+* `rate`: daily interest rate, e.g 0.0002 (0.02%), must be <= 0.07%
+* `currency`: currency e.g 'USD', 'BTC', etc (all available in the system except JPY)
+* `quantity`: quantity to lend
+
+
+> Success Response
+
+```
+{
+  "id": "4849",
+  "quantity": 0.01,
+  "filled_quantity": 0.0,
+  "currency": "BTC",
+  "status": "live",
+  "rate": 0.0002
+}
+```
+
+> Error Response
+
+```
+{
+  "error": "Currency missing"
+}
+```
+
+## 7.2. Get live loan bids
+
+```
+GET /loan_bids
+```
+#### Parameters:
+
+* `currency`: currency e.g 'USD', 'BTC'
+* `all`: true, to get all live loan bids
+
+> Success Response
+
+```
+{
+  "models":
+    [
+      {
+        "id":"4854",
+        "quantity":1.0,
+        "currency":"BTC",
+        "filled_quantity":0.0,
+        "status":"live",
+        "rate":0.00035
+      }
+    ]
+}
+```
+
+> Error Response
+
+```
+{
+  "error": "Currency missing"
+}
+```
+
+
+## 7.3. Cancel loan bid
+
+```
+POST /loan_bids/:id/close
+```
+#### Parameters:
+
+* `id`: loan bid id to close
+
+> Success Response
+
+```
+{
+  "id": "4849",
+  "quantity": 0.01,
+  "filled_quantity": 0.0,
+  "currency": "BTC",
+  "status": "closed",
+  "rate": 0.0002
 }
 ```
 
