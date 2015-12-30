@@ -653,7 +653,29 @@ GET /accounts/balance
 ]
 ```
 
-## 5.2. List Accounts
+## 5.2. Available Balances
+
+```
+GET /accounts/free_balance?currency=USD
+```
+#### Parameters:
+
+* `currency*`: Fiat currency (USD, EUR, SGD, etc.)
+
+<aside class="notice">
+Since available balances are expensive to calculate and traders usually trade against one fiat at a time, only one available fiat balance is returned per request. Therefore fiat currency parameter is mandatory
+</aside>
+
+> Success Response
+
+```json
+{
+    "free_fiat_balance": 157.5,
+    "free_btc_balance": 0.256
+}
+```
+
+## 5.3. List Accounts
 
 
 ```
