@@ -45,15 +45,7 @@ HTTP 503: Service Unavailable
   please wait until you can do the call again.
 ```
 
-Quoine API provides a simple REST API to retrieve information about our markets and user data.
-Quoine provides access to two types of API consumer:
-
-* User API is recommended if you want to access your own account's features, like creating an order.
-* App API is for accessing Quoine integrated features directly from your application.
-
-Both JSON and XML formats are supported by all API calls
-You always need to specify a format (json | xml)
-By default, you need to pass authorized params (in Authentication) for all requests, otherwise, you will get HTTP status 401.
+Quoine API provides a simple REST API to retrieve information about our markets and user data. By default, you need to pass authorized params (in Authentication) for all requests, otherwise, you will get HTTP status 401.
 
 <aside class="notice">
 RATE LIMITING
@@ -64,17 +56,6 @@ API users should not make more than 300 requests per 5 minute. Requests go beyon
 # I. User API
 
 # 1. Authentication
-## 1.1 Token-based (DEPRECATED)
-
-Authentication is done using 3 parameters: `Device`, `UserId`, `Token`. These parameters can be obtained from
-<a href="https://www.quoine.com/app/#/app/settings" target="_blank"> Quoine settings page </a>
-
-These parameters need to be supplied in header of all requests as: `X-Quoine-Device`, `X-Quoine-User-Id`, `X-Quoine-User-Token`
-
-This authentication method is no longer available to new API users. Existing users should move to Secret-based as soon as possible. Token-based version will be removed
-entirely in our feature release.
-
-## 1.2 Secret-based
 ```ruby
 require 'uri'
 require 'net/http'
@@ -864,94 +845,5 @@ POST /loan_bids/:id/close
   "currency": "BTC",
   "status": "closed",
   "rate": 0.0002
-}
-```
-
-# II. App API
-App API is currently only available to our partners. For more information about partnership, please contact us directly
-
-# 1. Onboarding
-## 1.1. Create onboarding user
-
-```
-POST /users/onboarding
-```
-#### Parameters:
-
-* `first_name*`:
-* `last_name*`:
-* `first_furi_name`: for Japanese name
-* `last_furi_name`: for Japanese name
-* `phone*`: phone number, can be with or without country code, e.g +819017901357, 09017901357
-* `email*`:
-* `address`:
-* `city`:
-* `country*`: country code, e.g 'JP', 'VN', 'US'
-* `postcode`:
-* `password*`:
-* `id_document*`: Id document file
-* `proof_address*`: Proof of address file
-* `bank_statement*`: Bank statement file
-
-
-
-> Success Response
-
-```
-{
-  "success": true,
-  "user_id": 25
-}
-```
-
-> Error Response
-
-```
-{
-  "success": false,
-  "message": "Password cannot be blank"
-}
-```
-
-## 1.2. Check onboarding user status
-
-```
-POST /users/onboarding_status
-```
-#### Parameters:
-
-* `user_id*`: user id
-* `password*`: user password
-
-
-
-* `status`: valid values 'PENDING', 'APPROVED', 'DECLINED'
-
-> Success Response
-
-```
-{
-  "success": true,
-  "status": "APPROVED",
-  "api_id": "25",
-  "api_secret": "XMDwUjclch9IVNfuVjep23tMZRhPk0GId0mwFO2N1RPF8WZQ=="
-}
-```
-
-```
-{
-  "success": true,
-  "status": "DECLINED",
-  "reason": "Mismatched first name"
-}
-```
-
-
-> Error Response
-
-```
-{
-  "success": false,
-  "message": "Unauthorized access"
 }
 ```
