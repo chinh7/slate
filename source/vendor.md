@@ -144,6 +144,10 @@ Make sure your POST params are user_id and password of the user that was created
 ```
 POST /btc_withdrawals/
 ```
+<aside class="notice">
+To request auth_code, please GET /users/:user_id/auth_code. This authentication code will be sent via email or sms.
+</aside>
+
 > Sample payload
 
 ```json
@@ -168,7 +172,7 @@ POST /btc_withdrawals/
 }
 ```
 
-## 1.2. Get a bitcoin withdrawal
+## 2.2. Get a bitcoin withdrawal
 
 ```
 GET /btc_withdrawals/:id
