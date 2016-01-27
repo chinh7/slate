@@ -188,6 +188,149 @@ GET /btc_withdrawals/:id
 }
 ```
 
+# 3. Fiat Withdrawals
+## 3.1. Create a fiat withdrawal
+
+```
+POST /withdrawals/
+```
+This endpoint requires a bank_account_id, please [create a bank account](#4.1.-create-a-bank-account) to get one
+
+<aside class="notice">
+To request auth_code, please GET /users/:user_id/auth_code. This authentication code will be sent via email or sms.
+</aside>
+
+<aside class="notice">
+Only approved users can initiate this request, or else a 422 error will be returned
+</aside>
+
+
+
+> Sample payload
+
+```json
+
+{
+  "auth_code": "13332",
+  "withdrawal": {
+    "currency": "USD",
+    "amount": 100,
+    "bank_account_id": 25
+  }
+}
+```
+
+> Success Response
+
+```json
+{
+  "id": 20,
+  "amount": 100,
+  "currency": "USD",
+  "state": "pending"
+}
+```
+
+## 3.2. Get a fiat withdrawal
+
+```
+GET /withdrawals/:id
+```
+> Success Response
+
+```json
+{
+  "id": 20,
+  "amount": 100,
+  "currency": "USD",
+  "state": "pending"
+}
+```
+
+# 4. User Bank Accounts
+## 4.1. Create a bank account
+
+```
+POST /bank_accounts
+```
+<aside class="notice">
+Bank accounts should be created to be used with the /withdrawals endpoint
+</aside>
+
+> Sample payload
+
+```json
+
+{
+  "bank": "My Bank",
+  "bank_branch": "Fifth Avenue",
+  "address": "7 Fifth Avenue",
+  "acc_name": "John Peterson",
+  "acc_number": "12018882812"
+}
+```
+
+> Success Response
+
+```json
+{
+  "id": 52,
+  "bank": "My Bank",
+  "bank_branch": "Fifth Avenue",
+  "address": "7 Fifth Avenue",
+  "acc_name": "John Peterson",
+  "acc_number": "12018882812"
+}
+```
+
+## 4.2. Get a bank account
+
+```
+GET /bank_accounts/:id
+```
+> Success Response
+
+```json
+{
+  "id": 52,
+  "bank": "My Bank",
+  "bank_branch": "Fifth Avenue",
+  "address": "7 Fifth Avenue",
+  "acc_name": "John Peterson",
+  "acc_number": "12018882812"
+}
+```
+
+# 5. Get Exchange's Bank Info for Fiat Deposit
+
+```
+GET /accounts?with_bank=true
+```
+> Success Response
+
+```json
+{
+  "fiat_accounts": [
+    {
+      "id": 4695,
+      "currency": "USD",
+      "bank": {
+        "name": "OCBC Bank",
+        "branch": "503, North Branch",
+        "acc_name": "QUOINE PTE LTD ",
+        "bank_address": "65 Chulia Street, OCBC Centre, Singapore 049513",
+        "swift": "OCBCSGSG",
+        "bank_account_numbers": [
+          {
+            "account_number": "503216152301"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
 
 # II. WebSocket API
 
