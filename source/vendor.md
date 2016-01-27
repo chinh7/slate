@@ -301,7 +301,11 @@ GET /bank_accounts/:id
 }
 ```
 
-# 5. Get Exchange's Bank Info for Fiat Deposit
+# 5. Fiat Funding
+To fund fiat, users first need to deposit into Quoine's bank account, which can be retrieved as shown in 5.1.
+Funding info then should be submitted to expedite the process, as shown in 5.2.
+
+## 5.1. Get Exchange's Bank Info
 
 ```
 GET /accounts?with_bank=true
@@ -330,6 +334,24 @@ GET /accounts?with_bank=true
   ]
 }
 ```
+
+## 5.2. Submit Funding Info (Expedite Funding)
+
+```
+POST /fund_infos
+```
+> Sample payload
+
+```json
+
+{
+  "bank_name": "My Bank",
+  "currency": "USD",
+  "amount": "10000",
+  "fund_date": "1453917074"
+}
+```
+
 
 
 # II. WebSocket API
