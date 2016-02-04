@@ -637,7 +637,7 @@ GET /accounts/balance
 ## 5.2. Available Balances
 
 ```
-GET /accounts/free_balance?currency=USD
+GET /accounts/free_balances?currency=USD
 ```
 #### Parameters:
 
