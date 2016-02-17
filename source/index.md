@@ -847,3 +847,105 @@ POST /loan_bids/:id/close
   "rate": 0.0002
 }
 ```
+
+# 8. Trading Accounts
+
+## 8.1. List Trading Accounts
+
+```
+GET /trading_accounts
+```
+
+> Success Response
+
+```json
+[
+  {
+    "id": "3501",
+    "leverage_level": 25,
+    "max_leverage_level": 25,
+    "pnl": 0,
+    "equity": 9999.80668,
+    "margin": 0,
+    "free_margin": 9999.80668,
+    "trader_id": 6441,
+    "status": "active",
+    "product_code": "CASH",
+    "currency_pair_code": "BTCUSD",
+    "position": 0,
+    "balance": 9999.80668,
+    "margin_percent": 0.1
+  },
+  ...
+]
+```
+
+## 8.2. Get a Trading Account
+
+```
+GET /trading_accounts/:currency_pair_code
+```
+#### Parameters:
+
+* `currency_pair_code`: BTCUSD, BTCEUR, BTCJPY, BTCSGD, BTCHKD, BTCIDR, BTCAUD, BTCPHP, BTCCNY, BTCINR.
+
+> Success Response
+
+```
+{
+  "id": "3501",
+  "leverage_level": 25,
+  "max_leverage_level": 25,
+  "pnl": 0,
+  "equity": 9999.80668,
+  "margin": 0,
+  "free_margin": 9999.80668,
+  "trader_id": 6441,
+  "status": "active",
+  "product_code": "CASH",
+  "currency_pair_code": "BTCUSD",
+  "position": 0,
+  "balance": 9999.80668,
+  "margin_percent": 0.1
+}
+```
+
+## 8.3. Update Leverage Level
+
+```
+PUT /trading_accounts/:id
+```
+
+> Payload
+
+```
+{
+  "leverage_level": 5
+}
+```
+#### Parameters:
+* `id`: can be retrieved in trading account object
+
+#### Payload:
+* `leverage_level`: new leverage_level
+
+> Success Response
+
+```
+{
+  "id": "3501",
+  "leverage_level": 5,
+  "max_leverage_level": 25,
+  "pnl": 0,
+  "equity": 9999.80668,
+  "margin": 0,
+  "free_margin": 9999.80668,
+  "trader_id": 6441,
+  "status": "active",
+  "product_code": "CASH",
+  "currency_pair_code": "BTCUSD",
+  "position": 0,
+  "balance": 9999.80668,
+  "margin_percent": 0.1
+}
+```
