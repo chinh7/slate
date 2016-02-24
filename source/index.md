@@ -949,3 +949,104 @@ PUT /trading_accounts/:id
   "margin_percent": 0.1
 }
 ```
+
+# 9. Trades
+
+## 9.1. List Trades
+
+```
+GET /trades
+```
+
+> Success Response
+
+```json
+{
+  "models": [
+    {
+      "id": "3906",
+      "currency_pair_code": "BTCUSD",
+      "status": "open",
+      "side": "long",
+      "margin_used": 2335.7376002,
+      "quantity": 0.1,
+      "leverage_level": 2,
+      "product_code": "CASH",
+      "open_price": 403.31,
+      "close_price": 0,
+      "trader_id": 4807,
+      "pnl": 157,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "funding_currency": "JPY",
+      "created_at": 1455607142,
+      "updated_at": 1456285826
+    }
+  ],
+  "current_page": 1,
+  "total_pages": 1
+}
+```
+
+## 9.2. Close a trade
+
+```
+GET /trades/:id/close
+```
+
+> Success Response
+
+```
+{
+  "id": "3906",
+  "currency_pair_code": "BTCUSD",
+  "status": "closed",
+  "side": "long",
+  "margin_used": 2335.7376002,
+  "quantity": 0.1,
+  "leverage_level": 2,
+  "product_code": "CASH",
+  "open_price": 403.31,
+  "close_price": 405.31,
+  "trader_id": 4807,
+  "pnl": 2,
+  "stop_loss": 0,
+  "take_profit": 0,
+  "funding_currency": "JPY",
+  "created_at": 1455607142,
+  "updated_at": 1456285826
+}
+```
+
+## 9.3. Update a trade
+
+```
+PUT /trades/:id
+```
+#### Payload:
+* `stop_loss`: Stop Loss price
+* `take_profit`: Take Profit price,
+
+> Success Response
+
+```
+{
+  "id": "3906",
+  "currency_pair_code": "BTCUSD",
+  "status": "closed",
+  "side": "long",
+  "margin_used": 2335.7376002,
+  "quantity": 0.1,
+  "leverage_level": 2,
+  "product_code": "CASH",
+  "open_price": 403.31,
+  "close_price": 405.31,
+  "trader_id": 4807,
+  "pnl": 2,
+  "stop_loss": 0,
+  "take_profit": 0,
+  "funding_currency": "JPY",
+  "created_at": 1455607142,
+  "updated_at": 1456285826
+}
+```
