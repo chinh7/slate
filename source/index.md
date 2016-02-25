@@ -991,7 +991,7 @@ GET /trades
 ## 9.2. Close a trade
 
 ```
-GET /trades/:id/close
+POST /trades/:id/close
 ```
 
 > Success Response
