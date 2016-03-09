@@ -359,13 +359,13 @@ GET /orders/:id
       "id": 1,
       "price": 500,
       "quantity": 2,
-      "created_at": "2014-06-18 15:31:42 UTC"
+      "created_at": 1438083311
      },
      {
       "id": 2,
       "price": 500,
       "quantity": 0.5,
-      "created_at": "2014-06-18 15:31:42 UTC"
+      "created_at": 1438092200
      }
    ]
   }
@@ -704,7 +704,7 @@ GET /accounts
       "fiat_transactions": [
         {
          "id": 147,
-         "created_at": "2014-08-15T16:06:37Z",
+         "created_at": 1438052531,
          "transaction_type": null,
          "notes": null,
          "gross_amount": 5,
