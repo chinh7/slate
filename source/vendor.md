@@ -360,7 +360,11 @@ Quoine uses Pusher for real time data streaming. Please check <a href='https://p
 
 Please contact us for pusher key
 
-### Products
+### All Products
+- CHANNEL: `products`
+- EVENT: `updated`
+
+### One Product
 - CHANNEL: `product_cash_[currency pair code]_[product id]` (e.g. `product_cash_btcusd_1`)
 - EVENT: `updated`
 
