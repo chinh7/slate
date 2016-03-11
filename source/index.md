@@ -920,7 +920,9 @@ PUT /trading_accounts/:id
 
 ```
 {
-  "leverage_level": 5
+  "trading_account": {
+    "leverage_level": 5
+  }
 }
 ```
 #### Parameters:
