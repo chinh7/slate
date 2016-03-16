@@ -53,8 +53,9 @@ RATE LIMITING
 API users should not make more than 300 requests per 5 minute. Requests go beyond the limit will return with a 429 status
 </aside>
 
+# I. User API
 
-# Authentication
+# 1. Authentication
 ```ruby
 require 'uri'
 require 'net/http'
@@ -108,217 +109,133 @@ Authorization || "APIAuth user_id:signature", eg. "APIAuth 1:tq63DFC2IFHLNQb1ACQ
    <br><br><p>It's important to match the string components with request headers. For instance if a Content-MD5 is not included in the header, it should not be in the canonical string as well</p>
 </aside>
 
-# Types
 
-## Timestamps
+# 2. Products (Markets)
+
+## 2.1. List Products
 
 ```
-1457974024 (for 2016-03-14T16:47:04 in ISO 8601)
+GET /products
 ```
-
-Unless otherwise specified, all timestamps from API are returned in <a href="https://en.wikipedia.org/wiki/Unix_time" target="_blank">Unix Time</a>.
-
-## Numbers
-* Decimal numbers are returned as strings to avoid floating precision errors.
-* Integer numbers (including IDs) are unquoted.
-
-# Errors
-
-# Pagination
-
-```json
-{
-    "models": [ "<json objects>" ],
-    "current_page": "<current page>",
-    "total_pages": "<number of pages>"
-}
-```
-
-Unless otherwise specified, all API requesting lists will be paginated with the following format
-
-
-# I. Public API
-
-<aside class="notice">
-  Public API does not require authentication
-</aside>
-
-# Products
-
-## Get Products
-
-> GET /products
 
 ```json
 [
   {
-      "id": 5,
-      "market_ask": "47684.84",
-      "market_bid": "47674.65",
-      "base_currency": "BTC",
-      "quoted_currency": "JPY",
-      "btc_minimum_withdraw": "0.02",
-      "fiat_minimum_withdraw": "1500.0",
-      "low_market_bid": "47391.0",
-      "high_market_ask": "48080.0",
-      "volume_24h": "5047.493628919999999998",
-      "last_price_24h": "47616.86",
-      "last_traded_price": "47684.84",
-      "last_traded_quantity": "0.0525"
-  },  
+   "id": "5",
+   "product_type": "CASH",
+   "code": "CASH",
+   "name": " CASH Trading",
+   "market_ask": 40039.753722,
+   "market_bid": 39300,
+   "indicator": 0,
+   "currency_pair_id": "3",
+   "currency": "JPY",
+   "currency_pair_code": "BTCJPY",
+   "symbol": "¥",
+   "btc_minimum_withdraw": 0.02,
+   "fiat_minimum_withdraw": 1500,
+   "taker_fee": 0.005,
+   "low_market_bid": 39300,
+   "high_market_ask": 40039.753722,
+   "volume_24h": 0,
+   "last_price_24h": 0
+  },
   ...
 ]
 ```
-Get the list of all available products.
+
+#### Parameters:
+
+* `fetch`: `all` to fetch all live markets, otherwise, your accessiable markets are returned.
 
 
-## Get a Product
+## 2.2. Get a Product
 
-> GET /products/:id
-
-```json
-{
-    "id": 5,
-    "market_ask": "47684.84",
-    "market_bid": "47674.65",
-    "base_currency": "BTC",
-    "quoted_currency": "JPY",
-    "btc_minimum_withdraw": "0.02",
-    "fiat_minimum_withdraw": "1500.0",
-    "low_market_bid": "47391.0",
-    "high_market_ask": "48080.0",
-    "volume_24h": "5047.493628919999999998",
-    "last_price_24h": "47616.86",
-    "last_traded_price": "47684.84",
-    "last_traded_quantity": "0.0525"
-}
+```
+GET /products/:product_id
 ```
 
 #### Parameters:
 
-Parameters   | Optional? | Description
----------|-----------|------------
-id || Product ID
+* `id`: Product Id
 
-## Get Order Book
+Or
 
-> GET /products/:id/price_levels
+```
+GET /products/code/:code/:currency_pair_code
+```
 
 #### Parameters:
+
+* `currency_pair_code`: BTCUSD, BTCEUR, BTCJPY, BTCSGD, BTCHKD, BTCIDR, BTCAUD, BTCPHP, BTCCNY, BTCINR.
+* `code`: CASH (We will support more codes like FUTURES in the future)
+
+
+
+```json
+{
+  "id": "5",
+  "product_type": "CASH",
+  "code": "CASH",
+  "name": " CASH Trading",
+  "market_ask": 40039.753722,
+  "market_bid": 39300,
+  "indicator": 0,
+  "currency_pair_id": "3",
+  "currency": "JPY",
+  "currency_pair_code": "BTCJPY",
+  "symbol": "¥",
+  "btc_minimum_withdraw": 0.02,
+  "fiat_minimum_withdraw": 1500,
+  "taker_fee": 0.005,
+  "low_market_bid": 39300,
+  "high_market_ask": 40039.753722,
+  "volume_24h": 0,
+  "last_price_24h": 0,
+  "last_traded_price": 236.07
+}
+```
+
+## 2.3. Get Price Levels (Order Book)
+
+```
+GET /products/:product_id/price_levels
+```
+
+#### Parameters:
+
+* `product_id`: You might retrieve from `id` field of list of products in 2.1 and 2.2.
+
 
 ```json
 {
   "buy_price_levels": [
-    ["416.23000", "1.75000"],   ...
+    [
+      "49849.00000",
+      "0.69500"
+    ],
+    ...
   ],
   "sell_price_levels": [
-    ["416.47000", "0.28675"],   ...
+    [
+      "50533.00000",
+      "1.47470"
+    ],
+    ...
   ]
 }
 ```
 
-Parameters   | Optional? | Description
----------|-----------|------------
-id || Product ID
+* Price ladders is followed format: [`bid/ask price`, `amount of Bitcoin`]
 
-#### Format
-* Each price level follows: [`price`, `amount`]
-
-
-# Executions
-
-## Get Executions
-
-> GET /executions?product_id=1&limit=2&page=2
-
-```
-Success Response:
-```
-
-```json
-{
-    "models": [
-        {
-            "id": "190342",
-            "quantity": 0.01,
-            "price": 295.07,
-            "taker_side": "buy",
-            "created_at": 1438083311
-        },
-        {
-            "id": "190341",
-            "quantity": 0.01,
-            "price": 295.07,
-            "taker_side": "buy",
-            "created_at": 1438083275
-        }
-    ],
-    "current_page": 2,
-    "total_pages": 2630
-}
-```
-
-Get a list of recent executions from a product (Executions are sorted in DESCENDING order - Latest first)
-
-Parameters   | Optional? | Description
----------|-----------|------------
-product_id || Product ID
-limit | yes | How many executions should be returned. Must be <= 1000. Default is 20
-page | yes | From what page the executions should be returned, e.g if limit=20 and page=2, the response would start from the 21st execution. Default is 1
-
-
-## Get Executions by Timestamp
-
-> GET /executions?product_id=1&timestamp=1430630863&limit=2
-
-```
-Success Response:
-```
-
-```json
-[
-    {
-        "id": "25148",
-        "quantity": 9.82,
-        "price": 242.01,
-        "taker_side": "buy",
-        "created_at": 1430656664
-    },
-    {
-        "id": "25151",
-        "quantity": 0.1,
-        "price": 241,
-        "taker_side": "buy",
-        "created_at": 1430658400
-    }
-]
-```
-
-Get a list of executions after a particular time (Executions are sorted in ASCENDING order)
-
-Parameters   | Optional? | Description
----------|-----------|------------
-currency_pair_code || e.g. BTCJPY
-timestamp || Only show executions at or after this timestamp (Unix timestamps in seconds)
-limit | yes | How many executions should be returned. Must be <= 1000. Default is 20
-
-<aside class="notice">
-Since the timestamp is in second, there could be several executions with the same timestamp.
-The server will make the effort to include those with the same timestamps in one response. So users won't miss any execution in subsequent API calls (where new timestamp should = last execution timestamp + 1)
-<br>
-As a result, the number of executions returned could be larger than `limit` in some cases.
-</aside>
-
-
-# II Authenticated API
-
-All requests to Authenticated endpoints must be properly signed as shown in [Authentication](#authentication),
-
-# Orders
+# 3. Orders
 
 ## 3.1. Create an Order
 
-> POST /orders/
+```
+POST /orders/
+```
+> Sample payload
 
 ```json
 
@@ -334,9 +251,7 @@ All requests to Authenticated endpoints must be properly signed as shown in [Aut
 }
 ```
 
-```
-Success Response:
-```
+> Success Response
 
 ```
 {
@@ -348,6 +263,16 @@ Success Response:
    "side": "sell",
    "quantity": 5.0,
    "price": 500
+  }
+}
+```
+
+> Error Response
+
+```
+{
+  "error": {
+    "msg": "Limit order price is lower than market bid"
   }
 }
 ```
@@ -518,6 +443,130 @@ GET /orders?currency_pair_code=:currency_pair_code?status=:status?product_code=:
 }
 ```
 
+# 4. Executions
+
+## 4.1. List Executions
+
+```
+GET /executions?currency_pair_code=BTCUSD&limit=5&page=2
+```
+
+Parameters   | Optional? | Description
+---------|-----------|------------
+currency_pair_code || e.g. BTCJPY
+limit | yes | How many executions should be returned. Must be <= 1000. Default is 20
+page | yes | From what page the executions should be returned, e.g if limit=20 and page=2, the response would start from 21th execution. Default is 1
+
+> Success Response
+<br>
+> Executions are sorted in DESCENDING order
+
+```json
+{
+    "models": [
+        {
+            "id": "190342",
+            "quantity": 0.01,
+            "price": 295.07,
+            "taker_side": "buy",
+            "created_at": 1438083311
+        },
+        {
+            "id": "190341",
+            "quantity": 0.01,
+            "price": 295.07,
+            "taker_side": "buy",
+            "created_at": 1438083275
+        },
+        {
+            "id": "190340",
+            "quantity": 0.01,
+            "price": 294.38,
+            "taker_side": "buy",
+            "created_at": 1438083254
+        },
+        {
+            "id": "190207",
+            "quantity": 0.01,
+            "price": 295.57,
+            "taker_side": "sell",
+            "created_at": 1438054539
+        },
+        {
+            "id": "190206",
+            "quantity": 0.01,
+            "price": 295.57,
+            "taker_side": "sell",
+            "created_at": 1438054511
+        }
+    ],
+    "current_page": 2,
+    "total_pages": 1941
+}
+```
+
+## 4.2. List Executions by Timestamp
+
+```
+GET /executions?currency_pair_code=BTCUSD&timestamp=1430630863&limit=5
+```
+
+Parameters   | Optional? | Description
+---------|-----------|------------
+currency_pair_code || e.g. BTCJPY
+timestamp || Only show executions at or after this timestamp (Unix timestamps in seconds)
+limit | yes | How many executions should be returned. Must be <= 1000. Default is 20
+
+<aside class="notice">
+Since the timestamp is in seconds, there could be several executions with the same timestamp.
+The server will make the effort to include those with the same timestamps in one response. So users won't miss any execution in subsequent API calls (where new timestamp should = last execution timestamp + 1)
+<br>
+As a result, the number of executions returned could be larger than `limit` in some cases.
+</aside>
+
+> Success Response
+<br>
+> Executions are sorted in ASCENDING order
+
+```json
+[
+    {
+        "id": "25148",
+        "quantity": 9.82,
+        "price": 242.01,
+        "taker_side": "buy",
+        "created_at": 1430656664
+    },
+    {
+        "id": "25151",
+        "quantity": 0.1,
+        "price": 241,
+        "taker_side": "buy",
+        "created_at": 1430658400
+    },
+    {
+        "id": "25152",
+        "quantity": 9.82,
+        "price": 240.59,
+        "taker_side": "sell",
+        "created_at": 1430658407
+    },
+    {
+        "id": "25153",
+        "quantity": 0.099736,
+        "price": 240.51,
+        "taker_side": "sell",
+        "created_at": 1430658459
+    },
+    {
+        "id": "25385",
+        "quantity": 1.565,
+        "price": 228.16,
+        "taker_side": "buy",
+        "created_at": 1430949047
+    }
+]
+```
 
 ## 4.3. List Executions by User
 
