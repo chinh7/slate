@@ -59,7 +59,9 @@ This document introduces a set of API endpoints to facilitate communications bet
 
 ```json
 {
-  "ext_id": "vendor-user-id"
+  "ext_id": "vendor-user-id",
+  "email": "vendor-user-email",
+  "pin_code": "pin-code"
 }
 ```
 
@@ -71,7 +73,9 @@ Success Response:
 {
   "id": 1200,
   "secret": "myUserSecret",
-  "ext_id": "vendor-user-id"
+  "ext_id": "vendor-user-id",
+  "email": "vendor-user-email",
+  "pin_code": "pin-code"
 }
 ```
 User created will be immediately confirmed and approved
@@ -80,6 +84,39 @@ User created will be immediately confirmed and approved
 Parameters   | Optional? | Description
 ---------|-----------|------------
 ext_id || Vendor user ID
+
+## Update a User
+
+> PUT /users/:id
+
+```json
+{
+  "email": "vendor-user-email",
+  "pin_code": "pin-code"
+}
+```
+
+```
+Success Response:
+```
+
+```json
+{
+  "id": 1200,
+  "secret": "myUserSecret",
+  "ext_id": "vendor-user-id",
+  "email": "vendor-user-email",
+  "pin_code": "pin-code"
+}
+```
+User created will be immediately confirmed and approved
+#### Parameters:
+
+Parameters   | Optional? | Description
+---------|-----------|------------
+id || Quoine user ID
+
+
 
 # Fiat Funding
 > PUT /accounts/:id/fund
