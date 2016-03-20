@@ -304,7 +304,6 @@ PUT /orders/:id/cancel
 
 ```
 {
-  "order": {
   "id": "1",
   "order_type": "limit",
   "side": "sell",
@@ -314,7 +313,6 @@ PUT /orders/:id/cancel
   "product_code": "CASH",
   "currency_pair_code": "BTCJPY",
   "status": "cancelled"
-  }
 }
 ```
 
@@ -346,15 +344,14 @@ GET /orders/:id
 
 ```
 {
-  "order": {
-   "id": 1,
-   "order_type": "limit",
-   "side": "sell",
-   "quantity": 5.0,
-   "filled_quantity": 2.5,
-   "price": 500,
-   "status": "cancelled",
-   "executions": [
+  "id": 1,
+  "order_type": "limit",
+  "side": "sell",
+  "quantity": 5.0,
+  "filled_quantity": 2.5,
+  "price": 500,
+  "status": "cancelled",
+  "executions": [
      {
       "id": 1,
       "price": 500,
@@ -367,8 +364,7 @@ GET /orders/:id
       "quantity": 0.5,
       "created_at": 1438092200
      }
-   ]
-  }
+  ]
 }
 ```
 
