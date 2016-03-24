@@ -61,7 +61,7 @@ This document introduces a set of API endpoints to facilitate communications bet
 {
   "ext_id": "vendor-user-id",
   "email": "vendor-user-email",
-  "pin_code": "pin-code"
+  "auth_code": "pin-code"
 }
 ```
 
@@ -75,7 +75,7 @@ Success Response:
   "secret": "myUserSecret",
   "ext_id": "vendor-user-id",
   "email": "vendor-user-email",
-  "pin_code": "pin-code"
+  "auth_code": "pin-code"
 }
 ```
 User created will be immediately confirmed and approved
@@ -92,7 +92,7 @@ ext_id || Vendor user ID
 ```json
 {
   "email": "vendor-user-email",
-  "pin_code": "pin-code"
+  "auth_code": "pin-code"
 }
 ```
 
@@ -106,7 +106,7 @@ Success Response:
   "secret": "myUserSecret",
   "ext_id": "vendor-user-id",
   "email": "vendor-user-email",
-  "pin_code": "pin-code"
+  "auth_code": "pin-code"
 }
 ```
 User created will be immediately confirmed and approved
@@ -147,27 +147,6 @@ Parameters   | Optional? | Description
 id || account id
 amount || withdrawal amount
 
-# Crypto Funding
-Handled automatically on Quoine's side
-
-# Crypto Withdrawal
-> PUT /accounts/:id/withdraw
-
-```json
-{
-  "amount": "1",
-  "address": "1ACiWrMafn3YLRw5DCf9CqGAHcg1oK9tUj"
-}
-```
-Request crypto withdrawal. Account balance will be deducted once the withdrawal is approved
-
-Parameters   | Optional? | Description
----------|-----------|------------
-amount || amount to withdraw
-currency || currency
-address || bitcoin address
-
-
 # II. Notifications
 
 # Websocket
@@ -191,44 +170,3 @@ Please contact us for pusher key
 ### Executions:
 - CHANNEL: `executions_cash_[currency pair code]` (e.g. `executions_cash_btcjpy`)
 - EVENT: `created`
-
-# Webhook
-Quoine will notify vendor server all user events via the registered Webhook (POST'ed). The events are listed below
-> POST /hooks
-
-```json
-{
-  "url": "https://vendor-server.com/notifications"
-}
-```
-
-```
-Success Response:
-```
-
-```json
-{
-  "id": 25,
-  "url": "https://vendor-server.com/notifications",
-  "callback_errors": 0
-}
-```
-## Fund Received
-
-```json
-{
-  "ext_id": "vendor-user-id",
-  "event": "fund-received",
-  "currency": "BTC",
-  "amount": "1.25"
-}
-```
-
-## Margin call
-```json
-{
-  "ext_id": "vendor-user-id",
-  "event": "margin-call",
-  "free_margin": "0.05"
-}
-```
