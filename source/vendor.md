@@ -45,12 +45,13 @@ HTTP 503: Service Unavailable
   please wait until you can do the call again.
 ```
 
-This document introduces a set of API endpoints to facilitate communications between vendor servers and Quoine (Back office)
-<aside class="notice">
-  All endpoints listed require authentication (signed by Vendor ID/Secret)
-</aside>
+This document introduces a set of API endpoints to facilitate communications between app vendor and Quoine
 
-# I. REST API
+# I. REST API (Back office)
+
+<aside class="notice">
+  All endpoints listed in this section require authentication (signed by Vendor ID/Secret)
+</aside>
 
 # Users
 ## Create a User
@@ -147,7 +148,82 @@ Parameters   | Optional? | Description
 id || account id
 amount || withdrawal amount
 
-# II. Notifications
+# II. REST API (User)
+
+<aside class="notice">
+  All endpoints listed in this section require authentication (signed by User ID/Secret)
+</aside>
+
+## Crypto Withdrawals
+### Create a Crypto Withdrawal
+
+> POST /crypto_withdrawals/
+
+```json
+{
+  "auth_code": "13332",
+  "crypto_withdrawal": {
+    "amount": "0.5",
+    "address": "1ACiWrMafn3YLRw5DCf9CqGAHcg1oK9tUj",
+    "currency": "BTC"
+  }
+}
+```
+
+```
+Success Response:
+```
+
+```json
+{
+  "id": 20,
+  "amount": "0.5",
+  "address": "1ACiWrMafn3YLRw5DCf9CqGAHcg1oK9tUj",
+  "state": "pending"
+}
+```
+
+### Get a Crypto Withdrawal
+
+> GET /crypto_withdrawals/:id
+
+```
+Success Response:
+```
+
+```json
+{
+  "id": 20,
+  "amount": "0.5",
+  "address": "1ACiWrMafn3YLRw5DCf9CqGAHcg1oK9tUj",
+  "state": "pending"
+}
+```
+
+### Get Crypto Withdrawals
+
+> GET /crypto_withdrawals
+
+```
+Success Response:
+```
+
+```json
+{
+  "models": [
+    {
+      "id": 20,
+      "amount": "0.5",
+      "address": "1ACiWrMafn3YLRw5DCf9CqGAHcg1oK9tUj",
+      "state": "pending"
+    }
+  ],
+  "current_page": 1,
+  "total_pages": 1
+}
+```
+
+# III. Notifications
 
 # Websocket
 
