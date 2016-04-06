@@ -124,7 +124,8 @@ id || Quoine user ID
 
 ```json
 {
-  "amount": "100000"
+  "amount": "100000",
+  "notes": "1st Campaign"
 }
 ```
 
@@ -132,13 +133,16 @@ Parameters   | Optional? | Description
 ---------|-----------|------------
 id || account id
 amount || fund amount
+notes |yes| notes
+
 
 # Fiat Withdrawal
 > PUT /accounts/:id/withdraw
 
 ```json
 {
-  "amount": "100000"
+  "amount": "100000",
+  "notes": "1st Campaign"
 }
 ```
 Request fiat withdrawal. Account balance will be deducted immediately
@@ -147,6 +151,7 @@ Parameters   | Optional? | Description
 ---------|-----------|------------
 id || account id
 amount || withdrawal amount
+notes |yes| notes
 
 # II. REST API (User)
 
