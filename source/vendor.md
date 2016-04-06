@@ -159,8 +159,8 @@ notes |yes| notes
   All endpoints listed in this section require authentication (signed by User ID/Secret)
 </aside>
 
-## Crypto Withdrawals
-### Create a Crypto Withdrawal
+# Crypto Withdrawals
+## Create a Crypto Withdrawal
 
 > POST /crypto_withdrawals/
 
@@ -188,7 +188,7 @@ Success Response:
 }
 ```
 
-### Get a Crypto Withdrawal
+## Get a Crypto Withdrawal
 
 > GET /crypto_withdrawals/:id
 
@@ -205,7 +205,7 @@ Success Response:
 }
 ```
 
-### Get Crypto Withdrawals
+## Get Crypto Withdrawals
 
 > GET /crypto_withdrawals
 
