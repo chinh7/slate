@@ -236,8 +236,8 @@ Quoine uses Pusher for real time data streaming. Please check <a href='https://p
 
 Please contact us for pusher key
 
-### All Products
-- CHANNEL: `products`
+### Market Data
+- CHANNEL: `market_data_bid_ask`
 - EVENT: `updated`
 
 ### One Product
