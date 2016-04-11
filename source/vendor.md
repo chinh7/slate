@@ -118,6 +118,30 @@ Parameters   | Optional? | Description
 id || Quoine user ID
 
 
+## Get a user's Fiat Accounts
+
+> GET /users/:id/accounts
+
+```
+Success Response:
+```
+
+```json
+[
+  {
+    "id": 2300,
+    "currency": "USD",
+    "balance": "200"
+  }  
+]
+```
+#### Parameters:
+
+Parameters   | Optional? | Description
+---------|-----------|------------
+id || Quoine user ID
+
+
 
 # Fiat Funding
 > PUT /accounts/:id/fund
