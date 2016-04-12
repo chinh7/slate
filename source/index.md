@@ -564,6 +564,62 @@ As a result, the number of executions returned could be larger than `limit` in s
 ]
 ```
 
+## 4.3. List Executions by ID
+
+```
+GET /executions?currency_pair_code=BTCUSD&since=25148&limit=5
+```
+
+Parameters   | Optional? | Description
+---------|-----------|------------
+currency_pair_code || e.g. BTCJPY
+since || Only show executions with id equal or larger than this
+limit | yes | How many executions should be returned. Must be <= 1000. Default is 20
+
+> Success Response
+<br>
+> Executions are sorted in ASCENDING order
+
+```json
+[
+    {
+        "id": "25148",
+        "quantity": 9.82,
+        "price": 242.01,
+        "taker_side": "buy",
+        "created_at": 1430656664
+    },
+    {
+        "id": "25151",
+        "quantity": 0.1,
+        "price": 241,
+        "taker_side": "buy",
+        "created_at": 1430658400
+    },
+    {
+        "id": "25152",
+        "quantity": 9.82,
+        "price": 240.59,
+        "taker_side": "sell",
+        "created_at": 1430658407
+    },
+    {
+        "id": "25153",
+        "quantity": 0.099736,
+        "price": 240.51,
+        "taker_side": "sell",
+        "created_at": 1430658459
+    },
+    {
+        "id": "25385",
+        "quantity": 1.565,
+        "price": 228.16,
+        "taker_side": "buy",
+        "created_at": 1430949047
+    }
+]
+```
+
 ## 4.3. List Executions by User
 
 
