@@ -153,12 +153,31 @@ id || Quoine user ID
 }
 ```
 
+```
+Success Response:
+```
+
+```json
+{
+  "id": 9478,
+  "currency": "JPY",
+  "balance": "100000.0"
+}
+```
+
 Parameters   | Optional? | Description
 ---------|-----------|------------
 id || account id
 amount || fund amount
 notes |yes| notes
 
+Response Parameters
+
+Parameters   | Description
+---------|------------
+id | account id
+currency | account currency
+balance | account balance
 
 # Fiat Withdrawal
 > PUT /accounts/:id/withdraw
@@ -169,6 +188,18 @@ notes |yes| notes
   "notes": "1st Campaign"
 }
 ```
+```
+Success Response:
+```
+
+```json
+{
+  "id": 9478,
+  "currency": "JPY",
+  "balance": "100000.0"
+}
+```
+
 Request fiat withdrawal. Account balance will be deducted immediately
 
 Parameters   | Optional? | Description
@@ -176,6 +207,14 @@ Parameters   | Optional? | Description
 id || account id
 amount || withdrawal amount
 notes |yes| notes
+
+Response Parameters
+
+Parameters   | Description
+---------|------------
+id | account id
+currency | account currency
+balance | account balance
 
 # II. REST API (User)
 
