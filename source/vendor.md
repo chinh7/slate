@@ -149,7 +149,8 @@ id || Quoine user ID
 ```json
 {
   "amount": "100000",
-  "notes": "1st Campaign"
+  "notes": "1st Campaign",
+  "request_id": "jb-request-01"
 }
 ```
 
@@ -161,7 +162,8 @@ Success Response:
 {
   "id": 9478,
   "currency": "JPY",
-  "balance": "100000.0"
+  "balance": "100000.0",
+  "request_id": "jb-request-01"
 }
 ```
 
@@ -185,7 +187,8 @@ balance | account balance
 ```json
 {
   "amount": "100000",
-  "notes": "1st Campaign"
+  "notes": "1st Campaign",
+  "request_id": "jb-request-01"
 }
 ```
 ```
@@ -196,7 +199,8 @@ Success Response:
 {
   "id": 9478,
   "currency": "JPY",
-  "balance": "100000.0"
+  "balance": "100000.0",
+  "request_id": "jb-request-01"
 }
 ```
 
