@@ -74,6 +74,7 @@ Success Response:
 {
   "id": 1200,
   "secret": "myUserSecret",
+  "api_token_id": 10219,
   "ext_id": "vendor-user-id",
   "email": "vendor-user-email",
   "auth_code": "pin-code"
@@ -105,6 +106,7 @@ Success Response:
 {
   "id": 1200,
   "secret": "myUserSecret",
+  "api_token_id": 10219,
   "ext_id": "vendor-user-id",
   "email": "vendor-user-email",
   "auth_code": "pin-code"
