@@ -297,6 +297,24 @@ Success Response:
 }
 ```
 
+## Get Vendor Fees
+
+> GET /vendor_fees
+
+```
+Success Response:
+```
+
+```json
+[
+  {
+    "app_vendor_id": 6790,
+    "product_id": 5,
+    "fee": "100.0"
+  }
+]
+```
+
 # III. Notifications
 
 # Websocket
