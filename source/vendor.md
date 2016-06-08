@@ -2,7 +2,7 @@
 title: Quoine Exchange API Reference
 
 language_tabs:
-  - ruby
+  - sample
 
 toc_footers:
   - <a href='/'>Quoine API</a>
@@ -318,6 +318,25 @@ Success Response:
 # III. Notifications
 
 # Websocket
+
+```javascript
+
+// Javascript Client Sample
+// https://github.com/pusher/pusher-js
+
+var pusher = new Pusher(PUSHER_KEY, {
+  wsHost: PUSHER_HOST,
+  wsPort: PUSHER_PORT,
+  enabledTransports: ["ws", "flash"],
+  disabledTransports: ["flash"]
+});
+
+var channel = pusher.subscribe('market_data_bid_ask');
+channel.bind('updated', function(data) {
+    // processing new data
+  }
+);
+```
 
 Quoine uses Pusher for real time data streaming. Please check <a href='https://pusher.com/docs/'>Pusher</a> documentation and libraries on how to connect to our stream. You can also find an example for each stream below.
 
